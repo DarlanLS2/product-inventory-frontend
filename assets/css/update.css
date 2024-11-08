@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: "Karla"
+}
+
+body {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: hsl(148, 38%, 91%);
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+main {
+  display: flex;
+  justify-items: center;
+  padding: 2rem;
+  border-radius: 2rem;
+  background-color: #FFF;
+  flex-direction: column;
+  width: 40rem;
+}
+
+main h1 {
+  font-size: 24px;
+  font-weight: 700
+}
+
+main form input {
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(186, 15%, 59%);
+  padding: 1rem;
+  font-size: 14px;
+}
+
+main form label {
+  margin: 1rem 0;
+}
+
+main form section .inputLargo {
+  width: 100%;
+  display: flex;
+  margin: 1rem 0 0 0;
+}
+
+main form section .inputPequeno {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+}
+main form section.nome section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+main form section.precoQuantidade {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+main form section.descricao {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+main form section.descricao textarea {  
+  border-radius: 0.5rem;
+  border: 1px solid hsl(186, 15%, 59%);
+  padding: 1rem;
+  font-size: 14px;
+  height: 6.5rem;
+  display: flex;
+  align-items: start;
+}
+
+main form section.botoes {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 0 0;
+}
+main form section.botoes button.buttonUpdate {
+  width: 49%;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: hsl(169, 82%, 27%);
+  color: #FFF;
+  font-weight: 500;
+  height: 3rem;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  font-size: 14px;
+}
+main form section.botoes button.buttonUpdate:hover {
+  background-color: hsl(169, 82%, 17%);
+}
+
+main form section.botoes button.buttonVoltar {
+  width: 49%;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #ea2d40;
+  color: #FFF;
+  font-weight: 500;
+  height: 3rem;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  font-size: 14px;
+}
+main form section.botoes button.buttonVoltar:hover {
+  background-color: #b22a32;
+}

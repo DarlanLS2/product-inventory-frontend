@@ -15,9 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/cadastro.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Contact form</title>
+  <title>Cadastro</title>
 </head>
 <body>
   <main>
@@ -50,8 +48,10 @@
         
         <!-- This field is required -->
       </section>
-
-      <input onclick="validarCadastro()" class="button" type="submit" value="Submit">
+      <section class="botoes">
+        <button type="button" class="buttonVoltar" onclick="paginaHome(event)">Voltar</button>
+        <button type="submit" onclick="validarCadastro(event)" class="buttonCadastrar">Cadastrar</button>
+      </section>
 
       <!-- Message Sent! -->
       <!-- Thanks for completing the form. We'll be in touch soon! -->
@@ -60,12 +60,20 @@
 
 </body>
 <script>
-    let validarCadastro = async () => {
-        let nome = document.getElementById("inputNome").value;
-        let preco = document.getElementById("inputPreco").value;
-        let quantidade = document.getElementById("inputQuantidade").value;
-        let descricao = document.getElementById("inputDescricao").value;
-        let resposta = await fetch("http://localhost:3000/produto/" + nome + "/" + preco + "/" + quantidade + "/" + descricao);
+   let paginaHome = (event) => {
+      event.preventDefault();
+      window.location.href = "http://127.0.0.1:5500/html/index.html";
+    };
+
+    let validarCadastro = async (event) => {
+      event.preventDefault(); 
+      let nome = document.getElementById("inputNome").value;
+      let preco = document.getElementById("inputPreco").value;
+      let quantidade = document.getElementById("inputQuantidade").value;
+      let descricao = document.getElementById("inputDescricao").value;
+
+      let resposta = await fetch("http://localhost:3000/produto/" + nome + "/" + preco + "/" + quantidade + "/" + descricao);
+      window.location.href = "http://127.0.0.1:5500/html/index.html";
     };
 </script>
 </html>

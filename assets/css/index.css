@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Karla";
+}
+
+body {
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: hsl(148, 38%, 91%);;
+}
+
+header {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+main {
+  margin: 1rem 0 0 0;
+  border-radius: 1rem;
+  background-color: #FFF;
+  padding: 1rem;
+}
+
+main table.produtos {
+  border-collapse: collapse; 
+  border: 1px solid #333; /* Define uma borda para que o efeito fique visível */
+  border-radius: 8px; /* Ajuste o valor para controlar o grau de arredondamento */
+  overflow: hidden; /* Necessário para que os cantos arredondados funcionem corretamente */
+}
+
+main table.produtos tr.head {
+  background-color: hsl(169, 82%, 27%);
+  height: 3rem;
+  color: #FFF;
+}
+
+main table.produtos tr.head th {
+  min-width: 6rem;
+}
+
+main table.produtos .iconeDelete {
+  color: #ea2d40;
+}
+main table.produtos td {
+  padding: 0.5rem;
+  min-width: 6rem;
+  text-align: center;
+  border: 1px solid hsl(186, 15%, 98%);
+}
+
+main table.produtos td.button {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+main table.produtos td.button:hover {
+  background-color: #e0e0e0;
+}
+
+section.botaoCadastrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0 0 0;
+  padding: 0.5rem;
+  border-radius: 10rem;
+  background-color: black;
+  opacity: 0.5;
+  width: 2rem;
+  height: 2rem;
+}
+
+section.botaoCadastrar:hover {
+  opacity: 0.7;
+}
+
+section.botaoCadastrar .iconeMais {
+  font-size: 14px;
+  color: #FFF;
+}
+
