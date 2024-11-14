@@ -72,7 +72,7 @@
       }
     const paginaHome = (event) => {
       event.preventDefault();
-      window.location.href = "http://127.0.0.1:5500/html/index.html";
+      window.location.href = "./index.html";
     };
     const validarUpdate = async (event) => {
       event.preventDefault(); 
@@ -81,7 +81,7 @@
       let quantidade = document.getElementById("inputQuantidade").value;
       let descricao = document.getElementById("inputDescricao").value;
       let resposta = await fetch("http://localhost:3000/update/"+ dados.idDigitado + "/" + nome + "/" + preco + "/" + quantidade + "/" + descricao);
-      window.location.href = "http://127.0.0.1:5500/html/index.html"
+      window.location.href = "./index.html"
     };
     const dados = JSON.parse(sessionStorage.getItem("dadosProduto"));
     console.log(dados.idDigitado);

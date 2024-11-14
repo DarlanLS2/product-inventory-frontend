@@ -35,10 +35,10 @@
     const paginaUpdate = async (id) => {
         const dados = { idDigitado: id };
         sessionStorage.setItem("dadosProduto", JSON.stringify(dados));
-        window.location.href = "http://127.0.0.1:5500/html/update.html";
+        window.location.href = "./update.html";
     };
     const paginaCadastro = () => {
-        window.location.href = "http://127.0.0.1:5500/html/cadastro.html";
+        window.location.href = "./cadastro.html";
     }
     const validarDelete = async (id) => {
         let resposta = await fetch("http://localhost:3000/delete/" + id)

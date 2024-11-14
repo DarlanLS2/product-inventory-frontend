@@ -62,7 +62,7 @@
 <script>
    let paginaHome = (event) => {
       event.preventDefault();
-      window.location.href = "http://127.0.0.1:5500/html/index.html";
+      window.location.href = "./index.html";
     };
 
     let validarCadastro = async (event) => {
@@ -73,7 +73,7 @@
       let descricao = document.getElementById("inputDescricao").value;
 
       let resposta = await fetch("http://localhost:3000/produto/" + nome + "/" + preco + "/" + quantidade + "/" + descricao);
-      window.location.href = "http://127.0.0.1:5500/html/index.html";
+      window.location.href = "./index.html";
     };
 </script>
 </html>
