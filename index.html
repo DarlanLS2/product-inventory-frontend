@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./src/styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Home</title>
 </head>
@@ -26,46 +26,11 @@
             </tr>  
         </table>
     </main>
-    <section class="botaoCadastrar" onclick="paginaCadastro()">
+    <section id="btnRegister" class="botaoCadastrar">
         <i class="fa-solid fa-plus iconeMais"></i>
     </section>
 </body>
 
-<script>
-    const paginaUpdate = async (id) => {
-        const dados = { idDigitado: id };
-        sessionStorage.setItem("dadosProduto", JSON.stringify(dados));
-        window.location.href = "./pages/update.html";
-    };
-    const paginaCadastro = () => {
-        window.location.href = "./pages/cadastro.html";
-    }
-    const validarDelete = async (id) => {
-      let resposta = await fetch("http://localhost:3000/product/" + id, {method: "DELETE"})
-        window.location.reload();
-    };
-    const consultarProdutos = async () => {
-        let resposta = await fetch("http://localhost:3000/");
-        let json = await resposta.json();
-        let tabela = document.querySelector("#tabela");
-        json.forEach((produto) => {
-            tabela.innerHTML += `
-                <tr>
-                    <td>${produto.id}</td>
-                    <td>${produto.nome}</td>
-                    <td>${produto.preco}</td>
-                    <td>${produto.quantidade}</td>
-                    <td>${produto.descricao}</td>
-                    <td class="button" onclick="paginaUpdate(${produto.id})">
-                        <i class="fa-solid fa-square-pen iconeUpdate"></i>
-                    </td>
-                    <td class="button" onclick="validarDelete(${produto.id})">            
-                        <i class="fa-solid fa-circle-xmark iconeDelete"></i>    
-                    </td>
-                </tr>
-            `;
-        })
-    };
-    consultarProdutos();
+<script type="module" src="./src/scripts/pages/index.js">
 </script>
 </html>

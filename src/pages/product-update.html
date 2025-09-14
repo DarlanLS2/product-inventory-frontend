@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/update.css">
+  <link rel="stylesheet" href="../styles/product-update.css">
   <title>Atualizar</title>
 </head>
 <body>
@@ -26,7 +26,7 @@
   </main>
 
 </body>
-<script>
+<script src="../scripts/pages/product-update.js">
     const exibirFormulario = async (id) => {
       let resposta = await fetch("http://localhost:3000/product/" + id);
       let produto = await resposta.json();
@@ -72,7 +72,7 @@
       }
     const paginaHome = (event) => {
       event.preventDefault();
-      window.location.href = "../index.html";
+      window.location.href = "../../index.html";
     };
     const validarUpdate = async (event) => {
       event.preventDefault(); 
@@ -83,7 +83,7 @@
       let resposta = await fetch("http://localhost:3000/update/"+ dados.idDigitado + "/" + nome + "/" + preco + "/" + quantidade + "/" + descricao, {
         method: "PUT"
       });
-      window.location.href = "../index.html"
+      window.location.href = "../../index.html"
     };
     const dados = JSON.parse(sessionStorage.getItem("dadosProduto"));
     console.log(dados.idDigitado);
