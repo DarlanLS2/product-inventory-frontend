@@ -72,7 +72,7 @@
       let quantidade = document.getElementById("inputQuantidade").value;
       let descricao = document.getElementById("inputDescricao").value;
 
-      let resposta = await fetch("http://localhost:3000/produto/" + nome + "/" + preco + "/" + quantidade + "/" + descricao);
+      let resposta = await fetch("http://localhost:3000/product/" + nome + "/" + preco + "/" + quantidade + "/" + descricao, {method: "POST"});
       window.location.href = "./index.html";
     };
 </script>

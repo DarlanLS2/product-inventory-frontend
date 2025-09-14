@@ -28,7 +28,7 @@
 </body>
 <script>
     const exibirFormulario = async (id) => {
-      let resposta = await fetch("http://localhost:3000/consulta/" + id);
+      let resposta = await fetch("http://localhost:3000/product/" + id);
       let produto = await resposta.json();
       let form = document.querySelector("#form");
         form.innerHTML += `
@@ -80,7 +80,9 @@
       let preco = document.getElementById("inputPreco").value;
       let quantidade = document.getElementById("inputQuantidade").value;
       let descricao = document.getElementById("inputDescricao").value;
-      let resposta = await fetch("http://localhost:3000/update/"+ dados.idDigitado + "/" + nome + "/" + preco + "/" + quantidade + "/" + descricao);
+      let resposta = await fetch("http://localhost:3000/update/"+ dados.idDigitado + "/" + nome + "/" + preco + "/" + quantidade + "/" + descricao, {
+        method: "PUT"
+      });
       window.location.href = "./index.html"
     };
     const dados = JSON.parse(sessionStorage.getItem("dadosProduto"));

@@ -41,7 +41,7 @@
         window.location.href = "./cadastro.html";
     }
     const validarDelete = async (id) => {
-        let resposta = await fetch("http://localhost:3000/delete/" + id)
+      let resposta = await fetch("http://localhost:3000/product/" + id, {method: "DELETE"})
         window.location.reload();
     };
     const consultarProdutos = async () => {
