@@ -1,15 +1,38 @@
-let paginaHome = (event) => {
-  event.preventDefault();
-  window.location.href = "../../index.html";
-};
+import { NavigationHandler } from "../utils/NavigationHandler.js";
+import { Api } from "../utils/Api.js";
 
-let validarCadastro = async (event) => {
-  event.preventDefault(); 
-  let nome = document.getElementById("inputNome").value;
-  let preco = document.getElementById("inputPreco").value;
-  let quantidade = document.getElementById("inputQuantidade").value;
-  let descricao = document.getElementById("inputDescricao").value;
+class RegisterPage {
+  constructor() {
+    this.cancelBtn = document.querySelector("#cancelBtn");
+    this.registerBtn = document.querySelector("#registerBtn");
+    this.indexPagePath = "../../index.html"
 
-  let resposta = await fetch("http://localhost:3000/product/" + nome + "/" + preco + "/" + quantidade + "/" + descricao, {method: "POST"});
-  window.location.href = "../../index.html";
-};
+    this.handleRegisterBtn();
+    this.handleCancelBtn();
+  }
+
+  async handleRegisterBtn() {
+    registerBtn.addEventListener("click", async () => {
+      let productData = this.getInputsValues();
+      await Api.postProduct(productData);
+      NavigationHandler.goTo(this.indexPagePath)
+    })
+  }
+
+  getInputsValues() {
+     return {
+       name: document.getElementById("inputNome").value,
+       price: document.getElementById("inputPreco").value,
+       quantity: document.getElementById("inputQuantidade").value,
+       description: document.getElementById("inputDescricao").value
+     }
+  }
+
+  handleCancelBtn() {
+    this.cancelBtn.addEventListener("click", () => {
+      NavigationHandler.goTo(this.indexPagePath)
+    })
+  }
+}
+
+const registerPage = new RegisterPage();

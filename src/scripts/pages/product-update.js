@@ -38,8 +38,8 @@ class UpdatePage {
       <!-- This field is required -->
       </section>
       <section class="botoes">
-      <button id="btnCancel" type="button" class="buttonVoltar">Voltar</button>
-      <button id="btnUpdate" type="button" class="buttonUpdate">Atualizar</button>
+      <button id="cancelBtn" type="button" class="buttonVoltar">Voltar</button>
+      <button id="updateBtn" type="button" class="buttonUpdate">Atualizar</button>
       </section>
       <!-- Message Sent! -->
       <!-- Thanks for completing the form. We'll be in touch soon! -->
@@ -49,15 +49,15 @@ class UpdatePage {
   }
 
   handleBtnCancel() {
-    let btnCancel = document.querySelector("#btnCancel");
-    btnCancel.addEventListener("click", () => {
+    let cancelBtn = document.querySelector("#cancelBtn");
+    cancelBtn.addEventListener("click", () => {
       NavigationHandler.goTo(this.indexPagePath)
     })
   }
 
   handleBtnUpdate() {
-    let btnUpdate = document.querySelector("#btnUpdate");
-    btnUpdate.addEventListener("click", () => {
+    let updateBtn = document.querySelector("#updateBtn");
+    updateBtn.addEventListener("click", () => {
       this.updateProduct();
     })
   }

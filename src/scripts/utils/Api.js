@@ -17,6 +17,17 @@ export class Api {
       throw new Error("Erro ao buscar produto: " + err)
     }
   }
+
+  static async postProduct(productData) {
+    try {
+      let route = `http://localhost:3000/product/${productData.name}/${productData.price}/${productData.quantity}/${productData.description}`
+      await fetch(route, {
+        method: "POST"
+      });
+    } catch (err) {
+      throw new Error("Erro ao cadastrar produto: " + err)
+    }
+  }
   
   //TODO: Passar os parametros pelo body da requisição
   static async upadateProduct(id, newProductData) {
