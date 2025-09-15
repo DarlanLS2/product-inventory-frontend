@@ -22,7 +22,8 @@ main {
   border-radius: 2rem;
   background-color: #FFF;
   flex-direction: column;
-  width: 40rem;
+  width: 90vw;
+  max-width: 40rem;
 }
 
 main h1 {

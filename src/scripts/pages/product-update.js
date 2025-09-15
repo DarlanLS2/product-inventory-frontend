@@ -38,7 +38,7 @@ class UpdatePage {
       </section>
       <section class="botoes">
       <button id="cancelBtn" type="button" class="buttonVoltar">Cancel</button>
-      <button id="updateBtn" type="button" class="buttonUpdate">Update</button>
+      <button id="updateBtn" type="button" class="buttonUpdate">Confirm</button>
       </section>
       <!-- Message Sent! -->
       <!-- Thanks for completing the form. We'll be in touch soon! -->
