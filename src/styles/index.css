@@ -34,13 +34,14 @@ main table.produtos {
 
 main table.produtos tr.head {
   background-color: hsl(169, 82%, 27%);
+  height: 5vh;
   color: #FFF;
 }
 
 main table.produtos tr.head th {
   min-width: 8vw;
   padding: 10px 2px;
-  font-size: clamp(10px, 1.5vw, 14px)
+  font-size: clamp(10px, 13px, 16px)
 }
 
 main table.produtos .iconeDelete {
@@ -48,11 +49,12 @@ main table.produtos .iconeDelete {
 }
 main table.produtos td {
   padding: 0.5rem;
+  height: 5vh;
   min-width: 8vw;
   max-width: 30vw;
   text-align: center;
   border: 1px solid #e0e0e0;
-  font-size: clamp(10px, 1.5vw, 14px)
+  font-size: clamp(10px, 12px, 16px)
 }
 
 main table.produtos td.description {
