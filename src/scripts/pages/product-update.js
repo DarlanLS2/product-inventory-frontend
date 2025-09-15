@@ -15,31 +15,30 @@ class UpdatePage {
     this.formElement.innerHTML += `
       <section class="nome">
       <section class="inputLargo">
-      <label for="inputNome">Nome:</label>
+      <label for="inputNome">Name:</label>
       <input type="text" id="inputNome" value="${product.nome}"required/>
-      <!-- This field is required -->
       </section>
       </section>
       <section class="precoQuantidade">
       <section class="inputPequeno">
-      <label for="inputPreco">Preço:</label>
+      <label for="inputPreco">Price:</label>
       <input type="number" id="inputPreco" value="${product.preco}"required/>
       </section>
       <section class="inputPequeno">
-      <label for="inputQuantidade">Quantidade:</label>
+      <label for="inputQuantidade">Quantity:</label>
       <input type="number" id="inputQuantidade" value="${product.quantidade}"required/>
       </section>
       <!-- Please enter a valid email address -->
       <!-- This field is required -->
       </section>
       <section class="descricao">
-      <label for="inputDescricao">Descrição:</label>
+      <label for="inputDescricao">Description:</label>
       <textarea id="inputDescricao" required>${product.descricao}</textarea>
       <!-- This field is required -->
       </section>
       <section class="botoes">
-      <button id="cancelBtn" type="button" class="buttonVoltar">Voltar</button>
-      <button id="updateBtn" type="button" class="buttonUpdate">Atualizar</button>
+      <button id="cancelBtn" type="button" class="buttonVoltar">Cancel</button>
+      <button id="updateBtn" type="button" class="buttonUpdate">Update</button>
       </section>
       <!-- Message Sent! -->
       <!-- Thanks for completing the form. We'll be in touch soon! -->

@@ -23,27 +23,24 @@ header {
 
 main {
   margin: 1rem 0 0 0;
-  border-radius: 1rem;
   background-color: #FFF;
   
 }
 
 main table.produtos {
   border-collapse: collapse; 
-  border: 1px solid #333; /* Define uma borda para que o efeito fique visível */
-  border-radius: 8px; /* Ajuste o valor para controlar o grau de arredondamento */
-  overflow: hidden; /* Necessário para que os cantos arredondados funcionem corretamente */
-  box-shadow: 0 0.5rem 0 0 hsl(0, 0%, 100%);
+  overflow: hidden;
 }
 
 main table.produtos tr.head {
   background-color: hsl(169, 82%, 27%);
-  height: 3rem;
   color: #FFF;
 }
 
 main table.produtos tr.head th {
-  min-width: 6rem;
+  min-width: 8vw;
+  padding: 10px 2px;
+  font-size: clamp(10px, 1.5vw, 14px)
 }
 
 main table.produtos .iconeDelete {
@@ -51,9 +48,17 @@ main table.produtos .iconeDelete {
 }
 main table.produtos td {
   padding: 0.5rem;
-  min-width: 6rem;
+  min-width: 8vw;
+  max-width: 30vw;
   text-align: center;
-  border: 1px solid hsl(186, 15%, 98%);
+  border: 1px solid #e0e0e0;
+  font-size: clamp(10px, 1.5vw, 14px)
+}
+
+main table.produtos td.description {
+  text-align: justify;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 main table.produtos td.button {

@@ -22,7 +22,7 @@ class IndexPage {
         <td>${product.nome}</td>
         <td>${product.preco}</td>
         <td>${product.quantidade}</td>
-        <td>${product.descricao}</td>
+        <td class="description">${product.descricao}</td>
         <td class="button" onclick="goToUpdatePage(${product.id})">
         <i class="fa-solid fa-square-pen iconeUpdate"></i>
         </td>
