@@ -1,61 +1,83 @@
-const exibirFormulario = async (id) => {
-  let resposta = await fetch("http://localhost:3000/product/" + id);
-  let produto = await resposta.json();
-  let form = document.querySelector("#form");
-  form.innerHTML += `
-    <section class="nome">
-    <section class="inputLargo">
-    <label for="inputNome">Nome:</label>
-    <input type="text" id="inputNome" value="${produto.nome}"required/>
-    <!-- This field is required -->
-    </section>
-    </section>
+import { Api } from "../utils/Api.js";
+import { NavigationHandler } from "../utils/NavigationHandler.js";
 
-    <section class="precoQuantidade">
-    <section class="inputPequeno">
-    <label for="inputPreco">Preço:</label>
-    <input type="number" id="inputPreco" value="${produto.preco}"required/>
-    </section>
-    <section class="inputPequeno">
-    <label for="inputQuantidade">Quantidade:</label>
-    <input type="number" id="inputQuantidade" value="${produto.quantidade}"required/>
-    </section>
-    <!-- Please enter a valid email address -->
-    <!-- This field is required -->
-    </section>
+class UpdatePage {
+  constructor() {
+    this.indexPagePath = "../../index.html"
+    this.formElement = document.querySelector("#form");
+    this.selectedProductData = JSON.parse(sessionStorage.getItem("data"));
 
-    <section class="descricao">
-    <label for="inputDescricao">Descrição:</label>
-    <textarea id="inputDescricao" required>${produto.descricao}</textarea>
+    this.showUpdateForm(this.selectedProductData.id)
+  }
 
-    <!-- This field is required -->
-    </section>
+  async showUpdateForm(id) {
+    let product = await Api.getProductByIdJson(id);
+    this.formElement.innerHTML += `
+      <section class="nome">
+      <section class="inputLargo">
+      <label for="inputNome">Nome:</label>
+      <input type="text" id="inputNome" value="${product.nome}"required/>
+      <!-- This field is required -->
+      </section>
+      </section>
+      <section class="precoQuantidade">
+      <section class="inputPequeno">
+      <label for="inputPreco">Preço:</label>
+      <input type="number" id="inputPreco" value="${product.preco}"required/>
+      </section>
+      <section class="inputPequeno">
+      <label for="inputQuantidade">Quantidade:</label>
+      <input type="number" id="inputQuantidade" value="${product.quantidade}"required/>
+      </section>
+      <!-- Please enter a valid email address -->
+      <!-- This field is required -->
+      </section>
+      <section class="descricao">
+      <label for="inputDescricao">Descrição:</label>
+      <textarea id="inputDescricao" required>${product.descricao}</textarea>
+      <!-- This field is required -->
+      </section>
+      <section class="botoes">
+      <button id="btnCancel" type="button" class="buttonVoltar">Voltar</button>
+      <button id="btnUpdate" type="button" class="buttonUpdate">Atualizar</button>
+      </section>
+      <!-- Message Sent! -->
+      <!-- Thanks for completing the form. We'll be in touch soon! -->
+      `;
+    this.handleBtnCancel();
+    this.handleBtnUpdate();
+  }
 
-    <section class="botoes">
-    <button type="button" class="buttonVoltar" onclick="paginaHome(event)">Voltar</button>
-    <button type="submit" onclick="validarUpdate(event)" class="buttonUpdate">Atualizar</button>
-    </section>
+  handleBtnCancel() {
+    let btnCancel = document.querySelector("#btnCancel");
+    btnCancel.addEventListener("click", () => {
+      NavigationHandler.goTo(this.indexPagePath)
+    })
+  }
 
+  handleBtnUpdate() {
+    let btnUpdate = document.querySelector("#btnUpdate");
+    btnUpdate.addEventListener("click", () => {
+      this.updateProduct();
+    })
+  }
 
-    <!-- Message Sent! -->
-    <!-- Thanks for completing the form. We'll be in touch soon! -->
-    `;
+  async updateProduct() {
+    let newProductData = this.getInputsValues();
+    let id = this.selectedProductData.id;
+
+    await Api.upadateProduct(id, newProductData);
+    NavigationHandler.goTo(this.indexPagePath)
+  };
+
+  getInputsValues() {
+    return {
+      name: document.getElementById("inputNome").value,
+      price: document.getElementById("inputPreco").value,
+      quantity: document.getElementById("inputQuantidade").value,
+      description: document.getElementById("inputDescricao").value
+    }
+  }
 }
-const paginaHome = (event) => {
-  event.preventDefault();
-  window.location.href = "../../index.html";
-};
-const validarUpdate = async (event) => {
-  event.preventDefault(); 
-  let nome = document.getElementById("inputNome").value;
-  let preco = document.getElementById("inputPreco").value;
-  let quantidade = document.getElementById("inputQuantidade").value;
-  let descricao = document.getElementById("inputDescricao").value;
-  let resposta = await fetch("http://localhost:3000/update/"+ dados.idDigitado + "/" + nome + "/" + preco + "/" + quantidade + "/" + descricao, {
-    method: "PUT"
-  });
-  window.location.href = "../../index.html"
-};
-const dados = JSON.parse(sessionStorage.getItem("dadosProduto"));
-console.log(dados.idDigitado);
-exibirFormulario(dados.idDigitado);
+
+const updatePage = new UpdatePage();
