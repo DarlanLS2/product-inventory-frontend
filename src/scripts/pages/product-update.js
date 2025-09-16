@@ -66,7 +66,7 @@ class UpdatePage {
     let id = this.selectedProductData.id;
 
     await Api.upadateProduct(id, newProductData);
-    //NavigationHandler.goTo(this.indexPagePath)
+    NavigationHandler.goTo(this.indexPagePath)
   };
 
   getInputsValues() {
