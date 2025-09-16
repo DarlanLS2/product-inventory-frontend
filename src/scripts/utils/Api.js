@@ -20,21 +20,37 @@ export class Api {
 
   static async postProduct(productData) {
     try {
-      let route = `http://localhost:3000/product/${productData.name}/${productData.price}/${productData.quantity}/${productData.description}`
-      await fetch(route, {
-        method: "POST"
+      await fetch("http://localhost:3000/product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: productData.name,
+          price: productData.price,
+          quantity: productData.quantity,
+          description: productData.description
+        })
       });
     } catch (err) {
       throw new Error("Erro ao cadastrar produto: " + err)
     }
   }
   
-  //TODO: Passar os parametros pelo body da requisição
   static async upadateProduct(id, newProductData) {
     try {
-      let updateRoute = `http://localhost:3000/update/${id}/${newProductData.name}/${newProductData.price}/${newProductData.quantity}/${newProductData.description}`;
-      await fetch(updateRoute, {
-        method: "PUT"
+      await fetch("http://localhost:3000/product", {
+        method: "PUT",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+          id: id,
+          name: newProductData.name,
+          price: newProductData.price,
+          quantity: newProductData.quantity,
+          description: newProductData.description
+        })
       });
     } catch (err) {
       throw new Error("Erro ao atulaizar produto: " + err);
