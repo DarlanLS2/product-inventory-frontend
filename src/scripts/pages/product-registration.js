@@ -11,6 +11,11 @@ class RegisterPage {
     this.handleCancelBtn();
   }
 
+  /*
+    * TODO: Fazer função que valide os inputs 
+    * export e fazer outra função que mostre um 
+    * alerta para o usuario troque o valor escrito
+    */
   async handleRegisterBtn() {
     registerBtn.addEventListener("click", async () => {
       let productData = this.getInputsValues();
