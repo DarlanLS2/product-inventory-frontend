@@ -1,36 +1,98 @@
 import { NavigationHandler } from "../utils/NavigationHandler.js";
 import { Api } from "../utils/Api.js";
+import { InputValidator } from "../utils/InputValidator.js";
 
 class RegisterPage {
   constructor() {
-    this.cancelBtn = document.querySelector("#cancelBtn");
     this.registerBtn = document.querySelector("#registerBtn");
-    this.indexPagePath = "../../index.html"
+    this.cancelBtn = document.querySelector("#cancelBtn");
+    this.indexPagePath = "../../index.html";
+
+    this.inputName = document.getElementById("inputNome");
+    this.inputPrice = document.getElementById("inputPreco");
+    this.inputQuantity = document.getElementById("inputQuantidade");
+    this.inputDescription = document.getElementById("inputDescricao");
 
     this.handleRegisterBtn();
     this.handleCancelBtn();
   }
 
-  /*
-    * TODO: Fazer função que valide os inputs 
-    * export e fazer outra função que mostre um 
-    * alerta para o usuario troque o valor escrito
-    */
   async handleRegisterBtn() {
     registerBtn.addEventListener("click", async () => {
       let productData = this.getInputsValues();
-      await Api.postProduct(productData);
-      NavigationHandler.goTo(this.indexPagePath)
+
+      this.handleInputsValidator(productData);
+
+      if (this.isAllInputsValid(productData)) {
+        await Api.postProduct(productData);
+        NavigationHandler.goTo(this.indexPagePath)
+      }
     })
   }
 
   getInputsValues() {
      return {
-       name: document.getElementById("inputNome").value,
-       price: document.getElementById("inputPreco").value,
-       quantity: document.getElementById("inputQuantidade").value,
-       description: document.getElementById("inputDescricao").value
+       name: this.inputName.value,
+       price: this.inputPrice.value,
+       quantity: this.inputQuantity.value,
+       description: this.inputDescription.value
      }
+  }
+
+  handleInputsValidator(productData) {
+    this.validNameInput(productData.name);
+    this.validPriceInput(productData.price);
+    this.validQuantityInput(productData.quantity);
+    this.validDescriptionInput(productData.description);
+  }
+
+  validNameInput(name) {
+    if (InputValidator.isNameValid(name)) {
+      this.hideInvalidValueMessage(this.inputName.nextElementSibling)
+    } else {
+      this.showInvalidValueMessage(this.inputName.nextElementSibling)
+    }
+  }
+
+  validPriceInput(price) {
+    if (InputValidator.isPriceValid(price)) {
+      this.hideInvalidValueMessage(this.inputPrice.nextElementSibling)
+    } else {
+      this.showInvalidValueMessage(this.inputPrice.nextElementSibling)
+    }
+  }
+
+  validQuantityInput(quantity) {
+    if (InputValidator.isQuantityValid(quantity)) {
+      this.hideInvalidValueMessage(this.inputQuantity.nextElementSibling)
+    } else {
+      this.showInvalidValueMessage(this.inputQuantity.nextElementSibling)
+    }
+  }
+
+  validDescriptionInput(description) {
+    if (InputValidator.isDescriptionValid(description)) {
+      this.hideInvalidValueMessage(this.inputDescription.nextElementSibling)
+    } else {
+      this.showInvalidValueMessage(this.inputDescription.nextElementSibling)
+    }
+  }
+
+  showInvalidValueMessage(span) {
+      span.style.display = "flex";
+  }
+
+  hideInvalidValueMessage(span) {
+      span.style.display = "none";
+  }
+
+  isAllInputsValid(productData) {
+    return (
+      InputValidator.isNameValid(productData.name) &&
+      InputValidator.isPriceValid(productData.price) &&
+      InputValidator.isQuantityValid(productData.quantity) &&
+      InputValidator.isDescriptionValid(productData.description)
+    );
   }
 
   handleCancelBtn() {

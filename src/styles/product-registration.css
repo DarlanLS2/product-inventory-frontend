@@ -38,6 +38,12 @@
     padding: 1rem;
     font-size: 14px;
   }
+  main form .inputSpan {
+    display: none;
+    margin: 3px 0 0 3px;
+    font-size: 11px;
+    color: red;
+  }
   
   main form label {
     margin: 1rem 0;
