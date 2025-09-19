@@ -16,6 +16,7 @@ class UpdatePage {
     this.showUpdateForm(this.selectedProductData.id)
   }
 
+  // TODO: Refatorar esta função
   async showUpdateForm(id) {
     let product = await Api.getProductByIdJson(id);
     this.formElement.innerHTML += `
@@ -63,10 +64,6 @@ class UpdatePage {
     this.inputPrice = document.getElementById("inputPreco");
     this.inputQuantity = document.getElementById("inputQuantidade");
     this.inputDescription = document.getElementById("inputDescricao");
-    console.log(this.inputName)
-    console.log(this.inputPrice)
-    console.log(this.inputQuantity)
-    console.log(this.inputDescription)
   }
 
   handleBtnCancel() {
@@ -107,6 +104,7 @@ class UpdatePage {
     this.validDescriptionInput(productData.description);
   }
 
+  // TODO: Modularizar esta função
   validNameInput(name) {
     if (InputValidator.isNameValid(name)) {
       this.hideInvalidValueMessage(this.inputName.nextElementSibling)
@@ -115,6 +113,7 @@ class UpdatePage {
     }
   }
 
+  // TODO: Modularizar esta função
   validPriceInput(price) {
     if (InputValidator.isPriceValid(price)) {
       this.hideInvalidValueMessage(this.inputPrice.nextElementSibling)
@@ -123,6 +122,7 @@ class UpdatePage {
     }
   }
 
+  // TODO: Modularizar esta função
   validQuantityInput(quantity) {
     if (InputValidator.isQuantityValid(quantity)) {
       this.hideInvalidValueMessage(this.inputQuantity.nextElementSibling)
@@ -131,6 +131,7 @@ class UpdatePage {
     }
   }
 
+  // TODO: Modularizar esta função
   validDescriptionInput(description) {
     if (InputValidator.isDescriptionValid(description)) {
       this.hideInvalidValueMessage(this.inputDescription.nextElementSibling)
@@ -139,14 +140,17 @@ class UpdatePage {
     }
   }
 
+  // TODO: Modularizar esta função
   showInvalidValueMessage(span) {
       span.style.display = "flex";
   }
 
+  // TODO: Modularizar esta função
   hideInvalidValueMessage(span) {
       span.style.display = "none";
   }
   
+  // TODO: Modularizar esta função
   isAllInputsValid(productData) {
     return (
       InputValidator.isNameValid(productData.name) &&

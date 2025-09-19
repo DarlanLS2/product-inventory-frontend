@@ -46,6 +46,7 @@ class RegisterPage {
     this.validDescriptionInput(productData.description);
   }
 
+  // TODO: Modularizar esta função
   validNameInput(name) {
     if (InputValidator.isNameValid(name)) {
       this.hideInvalidValueMessage(this.inputName.nextElementSibling)
@@ -54,6 +55,7 @@ class RegisterPage {
     }
   }
 
+  // TODO: Modularizar esta função
   validPriceInput(price) {
     if (InputValidator.isPriceValid(price)) {
       this.hideInvalidValueMessage(this.inputPrice.nextElementSibling)
@@ -62,6 +64,7 @@ class RegisterPage {
     }
   }
 
+  // TODO: Modularizar esta função
   validQuantityInput(quantity) {
     if (InputValidator.isQuantityValid(quantity)) {
       this.hideInvalidValueMessage(this.inputQuantity.nextElementSibling)
@@ -70,6 +73,7 @@ class RegisterPage {
     }
   }
 
+  // TODO: Modularizar esta função
   validDescriptionInput(description) {
     if (InputValidator.isDescriptionValid(description)) {
       this.hideInvalidValueMessage(this.inputDescription.nextElementSibling)
@@ -78,14 +82,17 @@ class RegisterPage {
     }
   }
 
+  // TODO: Modularizar esta função
   showInvalidValueMessage(span) {
       span.style.display = "flex";
   }
 
+  // TODO: Modularizar esta função
   hideInvalidValueMessage(span) {
       span.style.display = "none";
   }
 
+  // TODO: Modularizar esta função
   isAllInputsValid(productData) {
     return (
       InputValidator.isNameValid(productData.name) &&
