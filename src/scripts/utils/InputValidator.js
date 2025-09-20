@@ -18,4 +18,13 @@ export class InputValidator {
     let regex = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9 .,;:!?'"()\-–—]{1,}$/
     return regex.test(description);
   }
+
+  static isAllInputsValid(inputsValues) {
+    return (
+      this.isNameValid(inputsValues.name) &&
+      this.isPriceValid(inputsValues.price) &&
+      this.isQuantityValid(inputsValues.quantity) &&
+      this.isDescriptionValid(inputsValues.description)
+    );
+  }
 }

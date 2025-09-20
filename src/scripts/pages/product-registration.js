@@ -1,6 +1,7 @@
 import { NavigationHandler } from "../utils/NavigationHandler.js";
 import { Api } from "../utils/Api.js";
 import { InputValidator } from "../utils/InputValidator.js";
+import { FormValidator } from "../utils/FormValidator.js";
 
 class RegisterPage {
   constructor() {
@@ -19,12 +20,18 @@ class RegisterPage {
 
   async handleRegisterBtn() {
     registerBtn.addEventListener("click", async () => {
-      let productData = this.getInputsValues();
+      let inputsValues = this.getInputsValues();
+      let fields = {
+        name: this.inputName,
+        price: this.inputPrice,
+        quantity: this.inputQuantity,
+        description: this.inputDescription
+      }
 
-      this.handleInputsValidator(productData);
+      FormValidator.validateFields(inputsValues, fields);
 
-      if (this.isAllInputsValid(productData)) {
-        await Api.postProduct(productData);
+      if (InputValidator.isAllInputsValid(inputsValues)) {
+        await Api.postProduct(inputsValues);
         NavigationHandler.goTo(this.indexPagePath)
       }
     })
@@ -37,69 +44,6 @@ class RegisterPage {
        quantity: this.inputQuantity.value,
        description: this.inputDescription.value
      }
-  }
-
-  handleInputsValidator(productData) {
-    this.validNameInput(productData.name);
-    this.validPriceInput(productData.price);
-    this.validQuantityInput(productData.quantity);
-    this.validDescriptionInput(productData.description);
-  }
-
-  // TODO: Modularizar esta função
-  validNameInput(name) {
-    if (InputValidator.isNameValid(name)) {
-      this.hideInvalidValueMessage(this.inputName.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputName.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  validPriceInput(price) {
-    if (InputValidator.isPriceValid(price)) {
-      this.hideInvalidValueMessage(this.inputPrice.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputPrice.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  validQuantityInput(quantity) {
-    if (InputValidator.isQuantityValid(quantity)) {
-      this.hideInvalidValueMessage(this.inputQuantity.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputQuantity.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  validDescriptionInput(description) {
-    if (InputValidator.isDescriptionValid(description)) {
-      this.hideInvalidValueMessage(this.inputDescription.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputDescription.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  showInvalidValueMessage(span) {
-      span.style.display = "flex";
-  }
-
-  // TODO: Modularizar esta função
-  hideInvalidValueMessage(span) {
-      span.style.display = "none";
-  }
-
-  // TODO: Modularizar esta função
-  isAllInputsValid(productData) {
-    return (
-      InputValidator.isNameValid(productData.name) &&
-      InputValidator.isPriceValid(productData.price) &&
-      InputValidator.isQuantityValid(productData.quantity) &&
-      InputValidator.isDescriptionValid(productData.description)
-    );
   }
 
   handleCancelBtn() {
