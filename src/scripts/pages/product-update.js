@@ -13,20 +13,40 @@ class UpdatePage {
     this.inputQuantity;
     this.inputDescription;
 
-    this.showUpdateForm(this.selectedProductData.id)
+    this.initUpdateForm(this.selectedProductData.id)
   }
 
   // TODO: Refatorar esta função
-  async showUpdateForm(id) {
+  async initUpdateForm(id) {
     let product = await Api.getProductByIdJson(id);
-    this.formElement.innerHTML += `
+
+    this.renderInputsFields(this.formElement, product);
+    this.renderFormButtons(this.formElement);
+    this.bindInputsFields();
+    this.handleBtnCancel();
+    this.handleBtnUpdate();
+  }
+
+  renderInputsFields(element, product) {
+    this.renderInputNameField(element, product.nome)
+    this.renderPriceAndQuantityFields(element, product)
+    this.renderDescriptionField(element, product.descricao)
+  }
+
+  renderInputNameField(element, name) {
+    element.innerHTML += `
       <section class="nome">
       <section class="inputLargo">
       <label for="inputNome">Name:</label>
-      <input type="text" id="inputNome" value="${product.nome}"required/>
+      <input type="text" id="inputNome" value="${name}"required/>
       <span class="inputSpan inputSpan-name">Please enter a valid value.</span>
       </section>
       </section>
+    `
+  }
+  
+  renderPriceAndQuantityFields(element, product) {
+    element.innerHTML += `
       <section class="precoQuantidade">
       <section class="inputPequeno">
       <label for="inputPreco">Price:</label>
@@ -38,28 +58,31 @@ class UpdatePage {
       <input type="number" id="inputQuantidade" value="${product.quantidade}"required/>
       <span class="inputSpan inputSpan-quantity">Please enter a valid value.</span>
       </section>
-      <!-- Please enter a valid email address -->
-      <!-- This field is required -->
       </section>
+    `
+  }
+
+
+  renderDescriptionField(element, description) {
+    element.innerHTML += `
       <section class="descricao">
       <label for="inputDescricao">Description:</label>
-      <textarea id="inputDescricao" required>${product.descricao}</textarea>
+      <textarea id="inputDescricao" required>${description}</textarea>
       <span class="inputSpan inputSpan-description">Please enter a valid value.</span>
-      <!-- This field is required -->
       </section>
+    `
+  }
+
+  renderFormButtons(element) {
+    element.innerHTML += `
       <section class="botoes">
       <button id="cancelBtn" type="button" class="buttonVoltar">Cancel</button>
       <button id="updateBtn" type="button" class="buttonUpdate">Confirm</button>
       </section>
-      <!-- Message Sent! -->
-      <!-- Thanks for completing the form. We'll be in touch soon! -->
-      `;
-    this.setInputs();
-    this.handleBtnCancel();
-    this.handleBtnUpdate();
+    `
   }
 
-  setInputs() {
+  bindInputsFields() {
     this.inputName = document.getElementById("inputNome");
     this.inputPrice = document.getElementById("inputPreco");
     this.inputQuantity = document.getElementById("inputQuantidade");
@@ -68,6 +91,7 @@ class UpdatePage {
 
   handleBtnCancel() {
     let cancelBtn = document.querySelector("#cancelBtn");
+
     cancelBtn.addEventListener("click", () => {
       NavigationHandler.goTo(this.indexPagePath)
     })
@@ -80,7 +104,6 @@ class UpdatePage {
       let newProductData = this.getInputsValues();
 
       this.handleInputsValidator(newProductData);
-
       if (this.isAllInputsValid(newProductData)) {
         await this.updateProduct(newProductData);
         NavigationHandler.goTo(this.indexPagePath)
