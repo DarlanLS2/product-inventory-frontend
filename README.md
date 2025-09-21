@@ -31,3 +31,4 @@ npm install -g live-server
 ```bash
 live-server
 ```
+> **Note:** Make sure the backend API is running at http://localhost:3000
