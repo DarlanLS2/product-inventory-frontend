@@ -37,7 +37,7 @@ export class Api {
     }
   }
   
-  static async upadateProduct(id, newProductData) {
+  static async updateProduct(id, newProductData) {
     try {
       await fetch("http://localhost:3000/product", {
         method: "PUT",

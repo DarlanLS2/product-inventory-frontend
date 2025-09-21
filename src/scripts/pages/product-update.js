@@ -1,32 +1,54 @@
 import { Api } from "../utils/Api.js";
 import { NavigationHandler } from "../utils/NavigationHandler.js";
 import { InputValidator } from "../utils/InputValidator.js";
+import { FormValidator } from "../utils/FormValidator.js";
 
 class UpdatePage {
   constructor() {
     this.indexPagePath = "../../index.html"
     this.formElement = document.querySelector("#form");
     this.selectedProductData = JSON.parse(sessionStorage.getItem("data"));
-
     this.inputName;
     this.inputPrice;
     this.inputQuantity;
     this.inputDescription;
 
-    this.showUpdateForm(this.selectedProductData.id)
+    this.initUpdateForm(this.selectedProductData.id)
   }
 
-  // TODO: Refatorar esta função
-  async showUpdateForm(id) {
+  async initUpdateForm(id) {
     let product = await Api.getProductByIdJson(id);
-    this.formElement.innerHTML += `
+
+    this.renderForm(this.formElement, product);
+    this.bindInputsFields();
+    this.handleBtnUpdate();
+    this.handleBtnCancel();
+  }
+
+  renderForm(formElement, product) {
+    let htmlString = 
+      this.getInputNameHtml(product.name) + 
+      this.getPriceAndQuantityInputsHtml(product) +
+      this.getInputDescriptionHtml(product.descricao) +
+      this.getButtonsHtml();
+
+    formElement.innerHTML = htmlString;
+  }
+
+  getInputNameHtml(name) {
+    return `
       <section class="nome">
       <section class="inputLargo">
       <label for="inputNome">Name:</label>
-      <input type="text" id="inputNome" value="${product.nome}"required/>
+      <input type="text" id="inputNome" value="${name}"required/>
       <span class="inputSpan inputSpan-name">Please enter a valid value.</span>
       </section>
       </section>
+    `
+  }
+  
+  getPriceAndQuantityInputsHtml(product) {
+    return `
       <section class="precoQuantidade">
       <section class="inputPequeno">
       <label for="inputPreco">Price:</label>
@@ -38,39 +60,34 @@ class UpdatePage {
       <input type="number" id="inputQuantidade" value="${product.quantidade}"required/>
       <span class="inputSpan inputSpan-quantity">Please enter a valid value.</span>
       </section>
-      <!-- Please enter a valid email address -->
-      <!-- This field is required -->
       </section>
+    `
+  }
+
+  getInputDescriptionHtml(description) {
+      return `
       <section class="descricao">
       <label for="inputDescricao">Description:</label>
-      <textarea id="inputDescricao" required>${product.descricao}</textarea>
+      <textarea id="inputDescricao" required>${description}</textarea>
       <span class="inputSpan inputSpan-description">Please enter a valid value.</span>
-      <!-- This field is required -->
       </section>
+    `
+  }
+
+  getButtonsHtml() {
+    return `
       <section class="botoes">
       <button id="cancelBtn" type="button" class="buttonVoltar">Cancel</button>
       <button id="updateBtn" type="button" class="buttonUpdate">Confirm</button>
       </section>
-      <!-- Message Sent! -->
-      <!-- Thanks for completing the form. We'll be in touch soon! -->
-      `;
-    this.setInputs();
-    this.handleBtnCancel();
-    this.handleBtnUpdate();
+    `
   }
 
-  setInputs() {
+  bindInputsFields() {
     this.inputName = document.getElementById("inputNome");
     this.inputPrice = document.getElementById("inputPreco");
     this.inputQuantity = document.getElementById("inputQuantidade");
     this.inputDescription = document.getElementById("inputDescricao");
-  }
-
-  handleBtnCancel() {
-    let cancelBtn = document.querySelector("#cancelBtn");
-    cancelBtn.addEventListener("click", () => {
-      NavigationHandler.goTo(this.indexPagePath)
-    })
   }
 
   async handleBtnUpdate() {
@@ -78,10 +95,16 @@ class UpdatePage {
 
     updateBtn.addEventListener("click", async () => {
       let newProductData = this.getInputsValues();
+      let fields = {
+        name: this.inputName,
+        price: this.inputPrice,
+        quantity: this.inputQuantity,
+        description: this.inputDescription
+      }
 
-      this.handleInputsValidator(newProductData);
+      FormValidator.validateFields(newProductData, fields);
 
-      if (this.isAllInputsValid(newProductData)) {
+      if (InputValidator.isAllInputsValid(newProductData)) {
         await this.updateProduct(newProductData);
         NavigationHandler.goTo(this.indexPagePath)
       }
@@ -97,74 +120,19 @@ class UpdatePage {
     }
   }
 
-  handleInputsValidator(productData) {
-    this.validNameInput(productData.name);
-    this.validPriceInput(productData.price);
-    this.validQuantityInput(productData.quantity);
-    this.validDescriptionInput(productData.description);
-  }
-
-  // TODO: Modularizar esta função
-  validNameInput(name) {
-    if (InputValidator.isNameValid(name)) {
-      this.hideInvalidValueMessage(this.inputName.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputName.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  validPriceInput(price) {
-    if (InputValidator.isPriceValid(price)) {
-      this.hideInvalidValueMessage(this.inputPrice.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputPrice.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  validQuantityInput(quantity) {
-    if (InputValidator.isQuantityValid(quantity)) {
-      this.hideInvalidValueMessage(this.inputQuantity.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputQuantity.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  validDescriptionInput(description) {
-    if (InputValidator.isDescriptionValid(description)) {
-      this.hideInvalidValueMessage(this.inputDescription.nextElementSibling)
-    } else {
-      this.showInvalidValueMessage(this.inputDescription.nextElementSibling)
-    }
-  }
-
-  // TODO: Modularizar esta função
-  showInvalidValueMessage(span) {
-      span.style.display = "flex";
-  }
-
-  // TODO: Modularizar esta função
-  hideInvalidValueMessage(span) {
-      span.style.display = "none";
-  }
-  
-  // TODO: Modularizar esta função
-  isAllInputsValid(productData) {
-    return (
-      InputValidator.isNameValid(productData.name) &&
-      InputValidator.isPriceValid(productData.price) &&
-      InputValidator.isQuantityValid(productData.quantity) &&
-      InputValidator.isDescriptionValid(productData.description)
-    );
-  }
-
   async updateProduct(newProductData) {
     let id = this.selectedProductData.id;
 
-    await Api.upadateProduct(id, newProductData);
+    await Api.updateProduct(id, newProductData);
   };
+
+  handleBtnCancel() {
+    let cancelBtn = document.querySelector("#cancelBtn");
+
+    cancelBtn.addEventListener("click", () => {
+      NavigationHandler.goTo(this.indexPagePath)
+    })
+  }
 }
 
 const updatePage = new UpdatePage();
