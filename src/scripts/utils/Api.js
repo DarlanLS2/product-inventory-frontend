@@ -2,7 +2,7 @@ export class Api {
 
   static async getAllProductsJson() {
     try {
-      let response = await fetch("http://localhost:3000/");
+      let response = await fetch("http://localhost:3000/product");
       return await response.json();
     } catch (err) {
       throw new Error("Erro ao buscar produtos: " + err);
