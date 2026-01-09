@@ -19,10 +19,10 @@ class IndexPage {
       this.tableElement.innerHTML += `
         <tr>
         <td>${product.id}</td>
-        <td>${product.nome}</td>
-        <td>${product.preco}</td>
-        <td>${product.quantidade}</td>
-        <td class="description">${product.descricao}</td>
+        <td>${product.name}</td>
+        <td>${product.price}</td>
+        <td>${product.quantity}</td>
+        <td class="description">${product.description}</td>
         <td class="button" onclick="goToUpdatePage(${product.id})">
         <i class="fa-solid fa-square-pen iconeUpdate"></i>
         </td>

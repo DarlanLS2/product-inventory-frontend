@@ -29,7 +29,7 @@ class UpdatePage {
     let htmlString = 
       this.getInputNameHtml(product.name) + 
       this.getPriceAndQuantityInputsHtml(product) +
-      this.getInputDescriptionHtml(product.descricao) +
+      this.getInputDescriptionHtml(product.description) +
       this.getButtonsHtml();
 
     formElement.innerHTML = htmlString;
@@ -52,12 +52,12 @@ class UpdatePage {
       <section class="precoQuantidade">
       <section class="inputPequeno">
       <label for="inputPreco">Price:</label>
-      <input type="number" id="inputPreco" value="${product.preco}"required/>
+      <input type="number" id="inputPreco" value="${product.price}"required/>
       <span class="inputSpan inputSpan-price">Please enter a valid value.</span>
       </section>
       <section class="inputPequeno">
       <label for="inputQuantidade">Quantity:</label>
-      <input type="number" id="inputQuantidade" value="${product.quantidade}"required/>
+      <input type="number" id="inputQuantidade" value="${product.quantity}"required/>
       <span class="inputSpan inputSpan-quantity">Please enter a valid value.</span>
       </section>
       </section>
